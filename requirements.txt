@@ -1,1 +1,2 @@
 loguru
+sentry_sdk
