@@ -5,7 +5,7 @@ setup(
     name="dongfeng_base",
     version="0.0.1",
     packages=find_packages(where=".", exclude=("tests",), include=("*",)),
-    install_requires=parse_requirements("requirements.txt"),
+    install_requires=parse_requirements("requirements.txt", session="dongfeng"),
     url="",
     license="",
     author="40huo",
