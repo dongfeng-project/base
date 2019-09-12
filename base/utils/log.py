@@ -1,7 +1,6 @@
 import logging
 
 from loguru import logger
-from sentry_sdk.integrations.logging import EventHandler, BreadcrumbHandler
 
 
 def init_log():
@@ -15,6 +14,3 @@ def init_log():
             logger_opt.log(record.levelname, record.getMessage())
 
     logging.basicConfig(handlers=[InterceptHandler()], level=logging.DEBUG)
-
-    logger.add(EventHandler(), format="{message}", level="ERROR")
-    logger.add(BreadcrumbHandler(), format="{message}", level="ERROR")
