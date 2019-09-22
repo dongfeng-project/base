@@ -1,9 +1,9 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name="dongfeng_base",
     version="0.0.1",
-    packages=find_packages(where=".", exclude=("tests",), include=("*",)),
+    packages=("dongfeng_base",),
     install_requires=("celery[redis]", "psutil"),
     url="",
     license="",
