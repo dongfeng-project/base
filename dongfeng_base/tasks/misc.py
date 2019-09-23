@@ -38,9 +38,7 @@ def get_resource_usage() -> ResourceSerializer:
         agent_threads = p.num_threads()
 
     cpu = psutil.cpu_percent()
-    logger.debug(f"系统CPU {cpu}%")
     mem = psutil.virtual_memory().percent
-    logger.debug(f"系统内存占用 {mem}%")
 
     result = ResourceSerializer(
         ip=get_ip(),
