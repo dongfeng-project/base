@@ -1,6 +1,3 @@
-from celery.schedules import crontab
+from dongfeng_base.consts.queues import TaskQueue
 
-# celery beat
-CELERYBEAT_SCHEDULE = {
-    "get_resource_usage": {"task": "dongfeng_base.tasks.misc.get_resource_usage", "schedule": crontab(minute="*")},
-}
+task_routes = {"overwatch.*": {"queue": TaskQueue.OVERWATCH.value}, "scout.*": {"queue": TaskQueue.SCOUT.value}}
