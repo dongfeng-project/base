@@ -7,3 +7,4 @@ class TaskName(Enum):
     @unique
     class OverWatch(Enum):
         GET_WORKER_STATS = "overwatch.misc.get_worker_stats"
+        RESOURCE_USAGE = "resource_usage"
