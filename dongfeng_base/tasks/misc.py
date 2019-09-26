@@ -3,15 +3,21 @@ import socket
 import time
 
 import psutil
-from celery import shared_task
 from celery.utils.log import get_task_logger
+from celery.worker.control import inspect_command
 
+from ..consts.tasks import TaskName
 from ..serializers.misc import ResourceSerializer
 
 logger = get_task_logger(__name__)
 
 
-@shared_task
+@inspect_command(name=TaskName.OverWatch.RESOURCE_USAGE.value)
+def resource_usage(state):
+    result = get_resource_usage()
+    return result.__dict__
+
+
 def get_ip() -> str:
     """
     获取本机ip
@@ -24,7 +30,6 @@ def get_ip() -> str:
         return ""
 
 
-@shared_task
 def get_resource_usage() -> ResourceSerializer:
     """
     获取机器资源使用信息
