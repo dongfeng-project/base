@@ -13,7 +13,13 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Black Code Formatter
-      uses: lgeiger/black-action@v1.0.1
+    - name: Setup Python
+      uses: actions/setup-python@v1
       with:
-        args: ". --check -l 120"
+        python-version: 3.7
+    - name: Install dependencies
+      run: python setup.py install
+    - name: Lint with black
+      run: |
+        pip install black
+        black --check -l 120 .
