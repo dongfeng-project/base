@@ -1,14 +1,9 @@
 name: CI
 
-on:
-  push:
-    branches:
-    - master
-    - release/*
+on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     
     steps:
@@ -19,7 +14,16 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: python setup.py install
+  
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
     - name: Lint with black
       run: |
         pip install black
         black --check -l 120 .
+    - name: Tests
+      run: |
+        pip install pytest
+        pytest tests
