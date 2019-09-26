@@ -17,12 +17,19 @@ jobs:
   
   lint:
     runs-on: ubuntu-latest
+    needs: build
     
     steps:
     - name: Lint with black
       run: |
         pip install black
         black --check -l 120 .
+  
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
     - name: Tests
       run: |
         pip install pytest
