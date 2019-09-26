@@ -20,6 +20,10 @@ jobs:
     needs: build
     
     steps:
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
     - name: Lint with black
       run: |
         pip install black
@@ -30,6 +34,10 @@ jobs:
     needs: build
     
     steps:
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
     - name: Tests
       run: |
         pip install pytest
