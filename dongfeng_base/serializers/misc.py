@@ -1,4 +1,7 @@
-class ResourceSerializer(object):
+from dongfeng_base.serializers import BaseSerializer
+
+
+class ResourceSerializer(BaseSerializer):
     def __init__(
         self,
         ip: str = "127.0.0.1",

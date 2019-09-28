@@ -8,3 +8,8 @@ class TaskName(Enum):
     class OverWatch(Enum):
         GET_WORKER_STATS = "overwatch.misc.get_worker_stats"
         RESOURCE_USAGE = "resource_usage"
+
+    @skip
+    @unique
+    class Scout(Enum):
+        DISCOVER_HOST = "scout.discover_host"
