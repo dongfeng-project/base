@@ -5,7 +5,7 @@ from dongfeng_base.utils.worker import get_resource_usage
 
 
 class TestIP(object):
-    def test_get_ip():
+    def test_get_ip(self):
         assert isinstance(get_ip(), str)
 
     def test_is_ip(self):
@@ -28,7 +28,7 @@ class TestIP(object):
 
 
 class TestWorker(object):
-    def test_get_resource_usage():
+    def test_get_resource_usage(self):
         result = get_resource_usage()
         assert isinstance(result.ip, str)
         assert isinstance(result.hostname, str)
