@@ -4,6 +4,8 @@ from typing import List
 
 from celery.utils.log import get_task_logger
 
+from .. import exceptions
+
 logger = get_task_logger(__name__)
 
 
@@ -71,7 +73,7 @@ def parse_ips(ips: str) -> List[ipaddress.ip_network]:
         # IP段
         start_ip_str, end_ip_str = ips.split("-")[:2]
         if not is_ip(start_ip_str) or not is_ip(end_ip_str):
-            raise Exception(f"{ips} IP格式错误")
+            raise exceptions.InvalidIP(ip=ips)
 
         start_ip = ipaddress.ip_address(start_ip_str)
         end_ip = ipaddress.ip_address(end_ip_str)
@@ -80,7 +82,7 @@ def parse_ips(ips: str) -> List[ipaddress.ip_network]:
     elif "/" in ips:
         # CIDR
         if not is_cidr(ips):
-            raise Exception(f"{ips} IP格式错误")
+            raise exceptions.InvalidCIDR(cidr=ips)
 
         cidr_network = ipaddress.ip_network(ips)
 
@@ -88,7 +90,7 @@ def parse_ips(ips: str) -> List[ipaddress.ip_network]:
 
     else:
         if not is_ip(ips):
-            raise Exception(f"{ips} IP格式错误")
+            raise exceptions.InvalidIP(ip=ips)
 
         ip_list.append(ipaddress.ip_address(ips))
 
