@@ -5,6 +5,11 @@ from aenum import Enum, unique, skip
 class TaskName(Enum):
     @skip
     @unique
+    class Base(Enum):
+        EXAMPLE = "base.example.example_task"
+
+    @skip
+    @unique
     class OverWatch(Enum):
         GET_WORKER_STATS = "overwatch.misc.get_worker_stats"
         RESOURCE_USAGE = "overwatch.misc.resource_usage"

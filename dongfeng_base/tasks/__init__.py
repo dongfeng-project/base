@@ -5,6 +5,8 @@ from celery.worker.control import inspect_command
 from dongfeng_base.consts.tasks import TaskName
 from dongfeng_base.utils.worker import get_resource_usage
 
+from .example import example_task
+
 
 def auto_register(entry: str, app: Celery):
     """
@@ -22,11 +24,10 @@ def auto_register(entry: str, app: Celery):
         return
 
     p = base_dir.glob("*.py")
-    relative_names = (x.name.replace(".py", "") for x in p if x.is_file())
+    relative_names = (x.name.replace(".py", "") for x in p if x.is_file() and "__init__" not in x.name)
 
     for name in relative_names:
-        print(name)
-        app.autodiscover_tasks(packages=(base_dir.name,), related_name=name)
+        app.autodiscover_tasks(packages=(base_dir.name,), related_name=name, force=True)
 
     app.autodiscover_tasks(packages=("dongfeng_base.tasks",))
 
@@ -38,4 +39,4 @@ def resource_usage(state):
 
 
 # 拆分的任务需要在这里手动注册，这样才能在其他包里使用app.autodiscover_tasks查找任务
-tasks = ()
+tasks = (example_task,)
