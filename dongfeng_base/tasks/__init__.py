@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from celery import Celery
+from celery import Celery, platforms
 from celery.worker.control import inspect_command
 from dongfeng_base.consts.tasks import TaskName
 from dongfeng_base.utils.worker import get_resource_usage
@@ -30,6 +30,11 @@ def auto_register(entry: str, app: Celery):
         app.autodiscover_tasks(packages=(base_dir.name,), related_name=name, force=True)
 
     app.autodiscover_tasks(packages=("dongfeng_base.tasks",))
+
+
+def debug_worker(env: str):
+    if env == "dev":
+        platforms.C_FORCE_ROOT = True
 
 
 @inspect_command(name=TaskName.OverWatch.RESOURCE_USAGE.value)
