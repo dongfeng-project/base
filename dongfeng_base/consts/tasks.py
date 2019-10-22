@@ -23,3 +23,4 @@ class TaskName(Enum):
         DETECT_HOST = "scout.host.detect_host"
         DETECT_PORT = "scout.host.detect_port"
         DETECT_SERVICE = "scout.host.detect_service"
+        ENUM_SUBDOMAIN = "scout.domain.enum_subdomain"
