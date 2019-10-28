@@ -24,3 +24,4 @@ class TaskName(Enum):
         DETECT_PORT = "scout.host.detect_port"
         DETECT_SERVICE = "scout.host.detect_service"
         ENUM_SUBDOMAIN = "scout.domain.enum_subdomain"
+        PREFETCH_SUBDOMAIN = "scout.domain.prefetch_subdomain"
