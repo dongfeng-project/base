@@ -25,3 +25,8 @@ class TaskName(Enum):
         DETECT_SERVICE = "scout.host.detect_service"
         ENUM_SUBDOMAIN = "scout.domain.enum_subdomain"
         PREFETCH_SUBDOMAIN = "scout.domain.prefetch_subdomain"
+
+    @skip
+    @unique
+    class Missile(Enum):
+        HYDRA = "missile.brute.hydra"

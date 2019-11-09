@@ -6,3 +6,4 @@ class TaskQueue(Enum):
     BASE = "base"
     OVERWATCH = "overwatch"
     SCOUT = "scout"
+    MISSILE = "missile"
