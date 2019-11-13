@@ -1,5 +1,6 @@
 import ipaddress
 
+from dongfeng_base.utils.cmd import Command
 from dongfeng_base.utils.hash import md5
 from dongfeng_base.utils.ip import is_ip, is_cidr, is_private_ip, parse_ips, get_ip
 from dongfeng_base.utils.worker import get_resource_usage
@@ -44,3 +45,14 @@ class TestWorker(object):
 class TestHash(object):
     def test_md5(self):
         assert md5("0") == "cfcd208495d565ef66e7dff9f98764da"
+
+
+class TestCmd(object):
+    cmder = Command(timeout=5)
+
+    def test_block_run(self):
+        assert b"home" in self.cmder.run(cmd="ls -1 /", is_async=False)
+
+    def test_async_run(self):
+        for line in self.cmder.run(cmd="ls -1 /", is_async=True):
+            assert b"\n" in line
