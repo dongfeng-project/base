@@ -89,9 +89,7 @@ class Command(object):
                 else:
                     yield stdout_line
         except StopIteration:
-            # 先杀死进程再停止迭代
-            self.__kill()
-            raise
+            pass
         finally:
             timer.cancel()
             self.process.stdout.close()
