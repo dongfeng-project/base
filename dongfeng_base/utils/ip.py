@@ -1,7 +1,9 @@
 import ipaddress
+import json
 import socket
 from typing import List
 
+import requests
 from celery.utils.log import get_task_logger
 
 from .. import exceptions
@@ -59,6 +61,28 @@ def is_cidr(string: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+def get_geo_location(ip: str) -> str:
+    """
+    获取IP地理位置
+    :param ip:
+    :return:
+    """
+    if not is_ip(ip):
+        raise exceptions.InvalidIP(ip=ip)
+
+    req = requests.get(url=f"http://freeapi.ipip.net/{ip}")
+    if req.status_code == 200:
+        try:
+            result = req.json()
+            return " ".join(result)
+        except json.JSONDecodeError:
+            logger.error(f"freeapi.ipip.net查询失败，响应内容 {req.text}")
+            return ""
+    else:
+        logger.error(f"请求ipip.net失败，状态码 {req.status_code}，响应内容 {req.text}")
+        return ""
 
 
 def parse_ips(ips: str) -> List[ipaddress.ip_network]:

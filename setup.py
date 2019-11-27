@@ -4,7 +4,7 @@ setup(
     name="dongfeng_base",
     version="0.0.1",
     packages=find_packages(where=".", exclude=("tests",), include=("*",)),
-    install_requires=("aenum", "celery[redis]", "psutil"),
+    install_requires=("aenum", "celery[redis]", "psutil", "requests"),
     url="",
     license="",
     author="40huo",
