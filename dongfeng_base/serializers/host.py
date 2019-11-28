@@ -11,10 +11,11 @@ class UpHostsSerializer(TaskResultSerializer):
 
 
 class OpenPortsSerializer(TaskResultSerializer):
-    def __init__(self, ip: str, ports: list, env: str, last_scan_time: datetime.datetime):
+    def __init__(self, ip: str, ports: list, corp_id: int, env: str, last_scan_time: datetime.datetime):
         super().__init__(env=env, last_scan_time=last_scan_time)
         self.ip = ip
         self.open_ports = ports
+        self.corp_id = corp_id
 
 
 class ServiceSerializer(TaskResultSerializer):
@@ -23,6 +24,7 @@ class ServiceSerializer(TaskResultSerializer):
         ip: str,
         port: int,
         env: str,
+        corp_id: int,
         last_scan_time: datetime.datetime,
         service: str = "unknown",
         product: str = "",
@@ -31,6 +33,7 @@ class ServiceSerializer(TaskResultSerializer):
         super().__init__(env=env, last_scan_time=last_scan_time)
         self.ip = ip
         self.port = port
+        self.corp_id = corp_id
         self.service = service
         self.product = product
         self.banner = banner
