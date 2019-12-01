@@ -9,6 +9,6 @@ class BaseSerializer(object):
 
 
 class TaskResultSerializer(BaseSerializer):
-    def __init__(self, env: str, last_scan_time: datetime.datetime):
+    def __init__(self, env: int, last_scan_time: datetime.datetime):
         self.env = env
         self.last_scan_time = last_scan_time

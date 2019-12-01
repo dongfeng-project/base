@@ -72,16 +72,20 @@ def get_geo_location(ip: str) -> str:
     if not is_ip(ip):
         raise exceptions.InvalidIP(ip=ip)
 
-    req = requests.get(url=f"http://freeapi.ipip.net/{ip}")
-    if req.status_code == 200:
-        try:
-            result = req.json()
-            return " ".join(result)
-        except json.JSONDecodeError:
-            logger.error(f"freeapi.ipip.net查询失败，响应内容 {req.text}")
+    try:
+        req = requests.get(url=f"http://freeapi.ipip.net/{ip}")
+        if req.status_code == 200:
+            try:
+                result = req.json()
+                return " ".join(result)
+            except json.JSONDecodeError:
+                logger.error(f"freeapi.ipip.net查询失败，响应内容 {req.text}")
+                return ""
+        else:
+            logger.error(f"请求ipip.net失败，状态码 {req.status_code}，响应内容 {req.text}")
             return ""
-    else:
-        logger.error(f"请求ipip.net失败，状态码 {req.status_code}，响应内容 {req.text}")
+    except Exception as e:
+        logger.exception(f"请求ipip.net异常 {e}")
         return ""
 
 

@@ -16,6 +16,8 @@ class TaskName(Enum):
         REPORT_UP_HOSTS = "overwatch.report.up_hosts"
         REPORT_OPEN_PORTS = "overwatch.report.open_ports"
         REPORT_SERVICE = "overwatch.report.service"
+        REPORT_ENUM_SUBDOMAINS = "overwatch.report.enum_subdomains"
+        REPORT_SUBDOMAIN_TITLE = "overwatch.report.subdomain_title"
 
     @skip
     @unique
